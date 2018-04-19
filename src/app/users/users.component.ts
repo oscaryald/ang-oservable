@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {User} from "../shared/user.model";
+import {Component, OnInit} from '@angular/core';
+import {User} from '../shared/models/user.model';
+import {UserService} from '../shared/services/user.service';
 
 @Component({
     selector: 'app-users',
@@ -7,14 +8,34 @@ import {User} from "../shared/user.model";
 })
 export class UsersComponent implements OnInit {
 
-    users: User[] = [];
+    successMessage: string = '';
+    errorMessage: string = '';
 
-    constructor() { }
+    constructor(private userService: UserService) {
+    }
 
     ngOnInit() {
 
+        // user has been created
+        this.userService.userCreated$.subscribe(user => {
+            this.successMessage = `${user.name} has been created!`;
+            this.clearMessages();
+        });
+
+        // user has been deleted
+        this.userService.userDeleted$.subscribe(() => {
+            this.successMessage = `the user has been deleted!`;
+            this.clearMessages();
+        });
+
     }
 
+    clearMessages(){
+        setTimeout(() => {
+            this.successMessage = '';
+            this.errorMessage = '';
+        },5000);
+    }
 
 
 }

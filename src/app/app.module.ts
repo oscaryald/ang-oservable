@@ -7,11 +7,13 @@ import {FormsModule} from "@angular/forms";
 import {AppComponent} from './app.component';
 import {UserListComponent} from './users/user-list/user-list.component';
 import {UserSingleComponent} from './users/user-single/user-single.component';
-import {UserService} from "./shared/user.service";
+import {UserService} from "./shared/services/user.service";
 import {RoutingModule} from "./router.module";
 import {UsersComponent} from "./users/users.component";
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { LoginComponent } from './login/login.component';
+import {AuthService} from './shared/services/auth.service';
 
 
 
@@ -23,7 +25,8 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
         UserSingleComponent,
         UsersComponent,
         UserCreateComponent,
-        UserEditComponent
+        UserEditComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
@@ -31,7 +34,7 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
         HttpClientModule,
         RoutingModule
     ],
-    providers: [UserService],
+    providers: [UserService, AuthService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../shared/user.service";
-import {User} from "../../shared/user.model";
+import {UserService} from "../../shared/services/user.service";
+import {User} from "../../shared/models/user.model";
 
 @Component({
   selector: 'app-user-list',
@@ -15,14 +15,19 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers()
+
+      this.userService.userCreated$.subscribe(user => {
+            console.log(this.users, 'test')
+      });
   }
 
   getUsers(){
     this.userService.getUsers()
         .subscribe((data) => {
-          console.log(data);
           this.users = data;
         })
   }
+
+
 
 }

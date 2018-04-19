@@ -1,8 +1,20 @@
 <div class="container">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" routerLink="/">Users</a>
-
     </nav>
+
+    <ul class="nav navbar-nav navbar-fight">
+        <li>
+            <a *ngIf="!isLoggedIn" routerLink="/login">
+                Login
+            </a>
+        </li>
+        <li>
+            <a *ngIf="isLoggedIn" (click)="logout()">
+                Logout
+            </a>
+        </li>
+    </ul>
     <router-outlet></router-outlet>
 </div>
 
